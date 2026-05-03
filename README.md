@@ -4,4 +4,4 @@ Tired of paying or waiting for keys for scripts? Meet Sourceware, Sourceware is 
 ### How to Use SOURCEWARE
 Paste the following script into your executor:
 ```lua
-loadstring(game:HttpGet("[https://raw.githubusercontent.com/VictimOfResponsibility/SourceWare-RakeRemastered/main/SourcewareRake.lua](https://raw.githubusercontent.com/VictimOfResponsibility/SourceWare-RakeRemastered/main/SourcewareRake.lua)"))()
+loadstring(game:HttpGet("[https://raw.githubusercontent.com/MidnightParadise295/SourceWare-RakeRemastered/main/SourcewareRake.lua](https://raw.githubusercontent.com/MidnightParadise295/SourceWare-RakeRemastered/main/SourcewareRake.lua)"))()
