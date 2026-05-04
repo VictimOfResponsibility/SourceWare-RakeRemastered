@@ -252,43 +252,37 @@ local killaura = HelpfulTab:CreateToggle({
     Flag = "KillauraToggle",
     Callback = function(Value)
         if Value then
+            local rake = game.Workspace:FindFirstChild("Rake")
+            if rake then
+                rakehrp = rake:FindFirstChild("HumanoidRootPart")
+            end
+            rakehrpfindconn = workspace.ChildAdded:Connect(function(child)
+                if child.Name == "Rake" then
+                    rakehrp = child:FindFirstChild("HumanoidRootPart")
+                end
+            end)
             local plr = game.Players.LocalPlayer
-            local char = plr:FindFirstChild("Character")
-            local stunstick = char:FindFirstChild("StunStick")
-
+            local char = plr.Character
+            stunstick = char:FindFirstChild("StunStick")
             if not stunstick then
+                Rayfield:Notify({
+                    Title = "Must Have StunStick!",
+                    Content = "Equip the Stunstick to use this feature",
+                    Duration = 6.5,
+                    Image = 4483362458,
+                })
                 stunstickfound = false
             end
-            stunstickfindconnchar = char.ChildAdded:Connect(function(child)
-                if child.Name == "StunStick" then
-                    stunstickfound = true
-                    stunstickevent = child:FindFirstChild("Event")
-                end
-            end)
-            stunstickbackpackconn = char.ChildAdded:Connect(function(child)
-                if child.Name == "StunStick" then
-                    stunstickfound = true
-                    stunstickevent = child:FindFirstChild("Event")
-                end
-            end)
-            rakehrp = game.Workspace.Rake:FindFirstChild("HumanoidRootPart")
-            if not rakehrp then
-                rakehrpexists = false
+            if stunstick then
+                stunstickfound = true
+                stunstickevent = stunstick:FindFirstChild("Event")
             end
-            rakehrpfindconn = game.Workspace.ChildAdded:Connect(function(child)
-                if child.Name == "Rake" then
-                    task.wait(0.3)
-                    rakehrp = child:FindFirstChild("HumanoidRootPart")
-                    if rakehrp then
-                        rakehrpexists = true
-                    end
-                end
-            end)
-            while stunstick and Value and rakehrp do
+            while stunstickfound and Value and rakehrp do
                 stunstickevent:FireServer("S")
                 stunstickevent:FireServer("H", rakehrp)
-                task.wait(0.1)
             end
+        else
+            stunstickfound = false
         end
     end,
 })
